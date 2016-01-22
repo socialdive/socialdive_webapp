@@ -16,30 +16,30 @@
 	    <div class="col-md-6 col-md-offset-3">
 	    <div id="addChallenge">
 		    <h2>Post Social Challenge</h2>
-			<form>
+			<form method="post" >
 				<fieldset class="form-group">
 				<label for="userfName">First Name</label>
-				<input class="form-control" id="fname" placeholder="First Name">
+				<input type="text" class="form-control" id="fname" placeholder="First Name" name="fname">
 				</fieldset>
 
 				<fieldset class="form-group">
 				<label for="userlName">Last Name</label>
-				<input class="form-control" id="lname" placeholder="Last Name">
+				<input type="text" class="form-control" id="lname" placeholder="Last Name" name="lname">
 				</fieldset>
 
 				<fieldset class="form-group">
 				<label for="userEmail">Email address</label>
-				<input type="email" class="form-control" id="email" placeholder="Enter email">
+				<input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
 				<small class="text-muted">We'll never share your email with anyone else.</small>
 				</fieldset>
 
 				<fieldset class="form-group">
 				<label for="exampleInputFile">Image Upload</label>
-				<input type="file" class="form-control-file" id="photo">
+				<input type="file" class="form-control-file" id="photo" name="photo">
 				<small class="text-muted">This is some placeholder block-level help text for the above input. It's a bit lighter and easily wraps to a new line.</small>
 				</fieldset>
 
-				<button id="btnAddChallenge">Upload Challenge</button>
+				<input type="submit">Upload Challenge</button>
 			</form>
 		</div>
 		</div>
@@ -53,57 +53,3 @@
     
 </body>
 </html>
-
-<script type="text/javascript">
-	 // Add User button click
-    $('#btnAddChallenge').on('click', addUser);
-
-
-    // Add User
-	function addUser(event) {
-	    event.preventDefault();
-
-	    // Super basic validation - increase errorCount variable if any fields are blank
-	    var errorCount = 0;
-	    $('#addChallenge input').each(function(index, val) {
-	        if($(this).val() === '') { errorCount++; }
-	    });
-
-	    // Check and make sure errorCount's still at zero
-	    if(errorCount === 0) {
-
-	        // If it is, compile all user info into one object
-	        var newPost = {
-	            'fname': $('#addChallenge fieldset input#fname').val(),
-	            'lname': $('#addChallenge fieldset input#lname').val(),
-	            'email': $('#addChallenge fieldset input#email').val(),
-	            'photo': $('#addChallenge fieldset input#photo').val()
-	        }
-
-	        // Use AJAX to post the object to our adduser service
-	        $.ajax({
-	            type: 'POST',
-	            data: newPost,
-	            url: '/new_post',
-	            dataType: 'JSON'
-	        }).done(function( response ) {
-
-	            // Check for successful (blank) response
-	            if (response.msg === '') {
-
-	            }
-	            else {
-
-	                // If something goes wrong, alert the error message that our service returned
-	                alert('Error: ' + response.msg);
-
-	            }
-	        });
-	    }
-	    else {
-	        // If errorCount is more than 0, error out
-	        alert('Please fill in all fields');
-	        return false;
-	    }
-	};
-</script>

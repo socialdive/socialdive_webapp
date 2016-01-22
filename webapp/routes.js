@@ -1,5 +1,5 @@
 var db     = require('./mongo.js');
-var posts  = db.dataInit('posts');
+var Post  = db.dataInit('posts');
 
 // timeParser = require('./timeParse.js');
 
@@ -22,14 +22,15 @@ module.exports = function(app){
   // ***
   // Inserts a new entry into the database
   // ***
-  app.post('/new_post', function(req,res){
-    console.log("it works");
-    // Person.count(function(err,count){
-    //   Person.create({id:count,first_name:req.query.first_name,last_name:req.query.last_name,email:req.query.email,country:req.query.country}, function(err,doc){
-    //     if(err) res.send(err);
-    //     res.status(200).send(doc);
-    //   });
-    // });
+  app.post('/post_form', function(req,res){
+    // console.log("it works");
+    // console.log(req.body);
+    Post.count(function(err,count){
+      Post.create({first_name:req.body.fname,last_name:req.body.lname,email:req.body.email,photo:req.body.photo}, function(err,doc){
+        if(err) res.send(err);
+        res.status(200).send(doc);
+      });
+    });
   });
-
+  
 };
