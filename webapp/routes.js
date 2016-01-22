@@ -19,4 +19,17 @@ module.exports = function(app){
     res.render('pages/post_form');
   });
 
+  // ***
+  // Inserts a new entry into the database
+  // ***
+  app.post('/new_post', function(req,res){
+    console.log("it works");
+    // Person.count(function(err,count){
+    //   Person.create({id:count,first_name:req.query.first_name,last_name:req.query.last_name,email:req.query.email,country:req.query.country}, function(err,doc){
+    //     if(err) res.send(err);
+    //     res.status(200).send(doc);
+    //   });
+    // });
+  });
+
 };
