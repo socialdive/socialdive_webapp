@@ -1,5 +1,8 @@
 var db     = require('./mongo.js');
 var Post  = db.dataInit('posts');
+var multer = require('multer');
+var upload = multer({ dest: 'uploads/' });
+
 
 // timeParser = require('./timeParse.js');
 
@@ -19,18 +22,13 @@ module.exports = function(app){
     res.render('pages/post_form');
   });
 
-  // ***
-  // Inserts a new entry into the database
-  // ***
-  app.post('/post_form', function(req,res){
-    // console.log("it works");
-    // console.log(req.body);
-    Post.count(function(err,count){
-      Post.create({first_name:req.body.fname,last_name:req.body.lname,email:req.body.email,photo:req.body.photo}, function(err,doc){
+  app.post('/post_form', upload.single('photo'), function(req,res){
+     Post.count(function(err,count){
+      Post.create({first_name:req.body.fname,last_name:req.body.lname,email:req.body.email,reflection:req.body.reflection,photo:req.body.photo}, function(err,doc){
         if(err) res.send(err);
         res.status(200).send(doc);
       });
     });
   });
-  
+
 };
