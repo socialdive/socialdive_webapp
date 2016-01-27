@@ -11,9 +11,9 @@ app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-// file uploads are stored in uploads/ folder.
-app.use('/uploads', express.static(__dirname + 'uploads'));
-
+// automatically stores file uploads in uploads/ folder.
+app.use('/webapp/uploads', express.static(__dirname + 'uploads'));
+app.use(multer({dest: './webapp/uploads/'}).single('photo'));
 
 // app.use(logger('dev'));
 app.use(bodyParser.json());

@@ -1,7 +1,7 @@
 var db     = require('./mongo.js');
 var Post  = db.dataInit('posts');
 var multer = require('multer');
-var upload = multer({ dest: 'uploads/' });
+var upload = multer({ dest: 'webapp/uploads/' });
 
 
 // timeParser = require('./timeParse.js');
@@ -22,13 +22,11 @@ module.exports = function(app){
     res.render('pages/post_form');
   });
 
-  app.post('/post_form', upload.single('photo'), function(req,res){
-     Post.count(function(err,count){
-      Post.create({first_name:req.body.fname,last_name:req.body.lname,email:req.body.email,reflection:req.body.reflection,photo:req.body.photo}, function(err,doc){
-        if(err) res.send(err);
-        res.status(200).send(doc);
-      });
-    });
+  app.post('/post_form', function(req,res){
+    console.log(req.body, req.file);
+    // Post.create({first_name:req.body.fname,last_name:req.body.lname,email:req.body.email,reflection:req.body.reflection}, function(err,doc){
+    //   if(err) res.send(err);
+    //   res.status(200).send(doc);
+    // });
   });
-
 };
