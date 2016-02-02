@@ -7,8 +7,21 @@ var routes = require('./routes');
 var app = express();
 
 app.set('port', process.env.PORT || 3000);
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
+// app.set('views', path.join(__dirname, 'views'));
+// app.set('view engine', 'ejs');
+
+// var jade = require('jade');
+// // compile 
+// var fn = jade.compile('string of jade', options);
+// var html = fn(locals);
+ 
+// // render 
+// var html = jade.render('string of jade', merge(options, locals));
+ 
+// // renderFile 
+// var html = jade.renderFile('filename.jade', merge(options, locals));
+
+app.set('view engine', 'jade');
 
 // app.use(logger('dev'));
 app.use(bodyParser.json());
