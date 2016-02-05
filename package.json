@@ -4,14 +4,14 @@
   "description": "Stepping out of your comfort zone",
   "main": "index.js",
   "scripts": {
-    "start": "node webapp/server.js",
+    "start": "node webapp/bin/www",
     "watch": "nodemon webapp/server.js"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/socialdive/socialdive_webapp"
   },
-  "author": "Josh Fermin",
+  "author": "Josh Fermin, Edward Zhu",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/socialdive/socialdive_webapp/issues"
@@ -28,11 +28,12 @@
     "ejs": "^2.3.4",
     "express": "^4.7.4",
     "express-generator": "^4.13.1",
-    "express-react-views": "^0.9.0",
     "jade": "^1.3.1",
     "mongoose": "*3.8.23",
+    "morgan": "^1.6.1",
     "react": "^0.14.6",
     "react-dom": "^0.14.6",
+    "serve-favicon": "^2.3.0",
     "serve-static": "~1.4.2"
   }
 }
