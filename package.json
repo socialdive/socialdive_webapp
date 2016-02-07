@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node webapp/bin/www",
-    "watch": "nodemon webapp/server.js"
+    "watch": "nodemon webapp/bin/www"
   },
   "repository": {
     "type": "git",
