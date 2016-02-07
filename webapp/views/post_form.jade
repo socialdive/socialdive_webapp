@@ -4,8 +4,17 @@ block content
     h1= title
     form(name="add-estimation", method="post")
         div.input
-            span.label Title
-            input(type="text", name="title")
+            span.label First Name 
+            input(type="text",placeholder="First Name", name="fname")
+        div.input
+            span.label Last Name 
+            input(type="text",placeholder="Last Name", name="lname")
+        div.input
+            span.label Email Address 
+            input(type="text",placeholder="Enter email", name="email")
+        div.input
+            span.label Photo Upload 
+            input(type="file", name="photo")
         div.actions
-            input(type="submit", value="add")
+            input(type="submit", value="Upload Challenge")
   
