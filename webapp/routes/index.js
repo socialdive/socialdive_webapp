@@ -23,6 +23,50 @@ router.get('/post_form', function(req, res, next) {
   res.render('post_form', { title: 'POST FORM' });
 });
 
+// Gets all photos from the database
+// TODO: change to get only md5 so we can use /photo/:md5 route to display.
+router.get('/all_photos', function(req,res){
+    var Grid = require('gridfs-stream');
+    Grid.mongo = mongoose.mongo;
+
+    var conn = mongoose.createConnection(process.env.DB_CONNECT);
+    conn.once('open', function() {
+        var gfs = Grid(conn.db);
+        gfs.files.find().toArray(function (err, files) {
+            if (err) {
+                res.json(err);
+            }
+            console.log(files);
+        });
+    });
+});
+
+// Displays photos via their md5 
+router.get('/photo/:md5',function(req,res){
+    var Grid = require('gridfs-stream');
+    Grid.mongo = mongoose.mongo;
+    var md5 = req.param('md5');
+
+    var conn = mongoose.createConnection(process.env.DB_CONNECT);
+    conn.once('open', function() {
+        var gfs = Grid(conn.db);
+        gfs.files.find({md5: md5}).toArray(function (err, files) {
+            if (err) {
+                res.json(err);
+            }
+            if (files.length > 0) {
+                var mime = 'image/jpeg';
+                res.set('Content-Type', mime);
+                var read_stream = gfs.createReadStream({md5: md5});
+                read_stream.pipe(res);
+            } else {
+            res.json('File Not Found');
+            }
+        });
+    });
+});
+
+
 // ***
 // Inserts a new entry into the database
 // ***
